@@ -6,32 +6,13 @@ const sequelize = new Sequelize({
   storage: path.join(__dirname, 'db.sqlite')
 });
 
-const Signification = sequelize.define('Signification', {
-    message: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    nombre: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-}, {
-    // Other model options go here
-});
-
-const Prenoms = sequelize.define('Prenoms', {
-    prenom: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-}, {
-    // Other model options go here
-});
+signification = require("./models/signification")
+prenoms = require("./models/prenoms")
 
 module.exports = {
     sequelize: sequelize,
     model: {
-        Signification: Signification,
-        Prenoms: Prenoms,
+        Signification: signification(sequelize),
+        Prenoms: prenoms(sequelize),
     }
 }
